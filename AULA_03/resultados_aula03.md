@@ -48,3 +48,18 @@ horario_atendimento       0.50      1.00      0.67         1
  [1 0 0]
  [0 1 0]]
 #========== FIM ==============
+
+_____________________________________________________________
+
+#========== PRODUÇÃO DO RELATÓRIO:==============
+# 1 - Cole o código corrigido e a acurácia obtida.
+Acuracia via Pipeline: 0.00%
+
+# 2 - Qual é a grande vantagem de utilizar o objeto Pipeline no Scikit-Learn?
+Reunir todas as etapas de processamento e treinamento do modelo (TfidfVectorizer, LogisticRegression) em um único objeto
+
+# 3 - Por que o Pipeline evita que erros de pré-processamento ocorram entre treino e teste?
+O Pipeline garante que o mesmo processo de pré-processamento seja utilizado tanto durante o treinamento quanto durante a previsão.
+
+# Todos os resultados devem ser inseridos no arquivo resultados_aula03.md
+#========== FIM ==============

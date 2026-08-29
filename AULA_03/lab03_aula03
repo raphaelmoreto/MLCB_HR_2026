@@ -24,24 +24,29 @@ dados_rh = {
 df3 = pd.DataFrame(dados_rh)
 
 # TODO 1: Separe o dataset em X ('mensagem') e y ('intencao')
-X = None
-y = None
+X = df3['mensagem']
+y = df3['intencao']
 
 # TODO 2: Realize o train_test_split com test_size=0.33 e random_state=42
-# X_train, X_test, y_train, y_test = ...
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.33,
+    random_state=42
+)
 
 # TODO 3: Monte o Pipeline encapsulando o TfidfVectorizer e a LogisticRegression
-# pipeline = Pipeline([
-#     ('vectorizer', TfidfVectorizer(stop_words=['de', 'o', 'meu', 'minhas'])),
-#     ('classifier', LogisticRegression())
-# ])
+pipeline = Pipeline([
+    ('vectorizer', TfidfVectorizer(stop_words=['de', 'o', 'meu', 'minhas'])),
+    ('classifier', LogisticRegression())
+])
 
 # TODO 4: Treine o pipeline completo com .fit() usando os dados de treino brutos
-# pipeline.fit(...)
+pipeline.fit(X_train, y_train)
 
 # TODO 5: Faca a predicao nos dados de teste brutos e exiba a acuracia
-# predicoes = pipeline.predict(...)
-# print(f"Acuracia via Pipeline: {accuracy_score(y_test, predicoes) * 100:.2f}%")
+predicoes = pipeline.predict(X_test)
+print(f"Acuracia via Pipeline: {accuracy_score(y_test, predicoes) * 100:.2f}%")
 
 #========== PRODUÇÃO DO RELATÓRIO:==============
 # 1 - Cole o código corrigido e a acurácia obtida.
