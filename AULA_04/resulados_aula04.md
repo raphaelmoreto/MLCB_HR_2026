@@ -67,3 +67,20 @@ Probabilidade: 66.67%
 [Teste 10/10]
 Digite a frase do cliente: palmeiras não tem mundial
 FALLBACK: encaminhando para atendimento humano...
+
+# ==============================================================================
+# ATIVIDADE 2: Construção do Zero (Versão 2 — Decision Tree e 8 Testes Digitados)
+# ==============================================================================
+precision    recall  f1-score   support
+
+     consultas       1.00      1.00      1.00         8
+financiamentos       1.00      0.86      0.92         7
+ investimentos       1.00      0.75      0.86         8
+    pagamentos       0.70      1.00      0.82         7
+
+      accuracy                           0.90        30
+     macro avg       0.93      0.90      0.90        30
+  weighted avg       0.93      0.90      0.90        30
+
+
+<img width="910" height="690" alt="image" src="https://github.com/user-attachments/assets/06dd54bd-d36f-4b1a-b910-f77e854a80d5" />
