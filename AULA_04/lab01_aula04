@@ -54,3 +54,100 @@ for i in range(1, 11):
       print(f"Probabilidade: {maior_prob:.2%}")
     else:
       print("FALLBACK: encaminhando para atendimento humano...")
+
+# ==============================================================================
+# ATIVIDADE 2: Construção do Zero (Versão 2 — Decision Tree e 8 Testes Digitados)
+# ==============================================================================
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.model_selection import train_test_split
+
+df = pd.read_csv('dataset_banco_100.csv')
+
+X_train, X_test, y_train, y_test = train_test_split(
+df['texto'],
+df['intencao'],
+test_size=0.30,
+random_state=42,
+stratify=df['intencao']
+)
+
+pipeline_nlu = Pipeline([
+('vectorizer', TfidfVectorizer(ngram_range=(1, 2))),
+('classifier', DecisionTreeClassifier(random_state=42))
+])
+
+pipeline_nlu.fit(X_train, y_train)
+
+y_pred = pipeline_nlu.predict(X_test)
+
+print(classification_report(y_test, y_pred))
+
+cm = confusion_matrix(y_test, y_pred)
+labels = sorted(df['intencao'].unique())
+
+plt.figure(figsize=(10, 7))
+
+sns.heatmap(
+cm,
+annot=True,
+fmt='d',
+cmap='Blues',
+xticklabels=labels,
+yticklabels=labels
+)
+
+plt.title('Matriz de Confusão - Decision Tree')
+plt.xlabel('Classe Preditiva')
+plt.ylabel('Classe Real')
+plt.xticks(rotation=45)
+plt.yticks(rotation=0)
+plt.tight_layout()
+plt.show()
+
+LIMIAR_CONFIANCA = 0.70
+
+while True:
+    texto = input("\nVocê: ")
+
+if texto.lower() == "sair":
+    print("Bot: Até logo!")
+    pass
+
+probabilidades = pipeline_nlu.predict_proba([texto])
+maior_prob = np.max(probabilidades)
+indice = np.argmax(probabilidades)
+intencao = pipeline_nlu.classes_[indice]
+
+if maior_prob >= LIMIAR_CONFIANCA:
+    print(
+        f"\nBot [Intenção: {intencao.upper()} | "
+        f"Confiança: {maior_prob * 100:.1f}%]: ",
+        end=""
+    )
+
+    if intencao == "investimentos":
+        print("Temos opções de CDB, LCI/LCA e Tesouro Direto. Qual seu perfil de risco?")
+
+    elif intencao == "consultas":
+        print("Seu saldo disponível é de R$ 4.820,50. Deseja consultar seu extrato?")
+
+    elif intencao == "pagamentos":
+        print("Área de pagamentos iniciada. Por favor, digite ou cole o código de barras.")
+
+    elif intencao == "financiamentos":
+        print("Simulador de crédito aberto. Qual o valor do bem que deseja financiar?")
+
+    else:
+        print("Como posso ajudar?")
+
+else:
+    print(f"\nBot: [FALLBACK - Confiança baixa: {maior_prob * 100:.1f}%]")
+    print("Desculpe, não entendi sua solicitação. Encaminhando você para um atendente humano...")
