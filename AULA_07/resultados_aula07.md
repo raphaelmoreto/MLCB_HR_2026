@@ -9,6 +9,12 @@
 resultado: {'status': 'FALLBACK', 'mensagem': 'Não consegui identificar sua solicitação com segurança.', 'confianca': 0.38345061954829884}
 
 # =====================================================================
+# LAB 2: TRIAGEM DE CHAMADOS COM NAIVE BAYES
+# =====================================================================
+
+{'intencao': 'fallback', 'confianca': 0.5456134367881129, 'protocolo': None}
+
+# =====================================================================
 # LAB 3: CHATBOT DE E-COMMERCE COM DECISION TREE
 # =====================================================================
 
