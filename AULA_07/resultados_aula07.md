@@ -7,3 +7,9 @@
 # =====================================================================
 
 resultado: {'status': 'FALLBACK', 'mensagem': 'Não consegui identificar sua solicitação com segurança.', 'confianca': 0.38345061954829884}
+
+# =====================================================================
+# LAB 3: CHATBOT DE E-COMMERCE COM DECISION TREE
+# =====================================================================
+
+{'intencao': np.str_('rastrear_pedido'), 'confianca': 1.0, 'codigo_rastreio': 'BR987654321'}
